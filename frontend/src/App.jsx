@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import './App.css'
+import CustomerRegisterForm from './components/CustomerRegisterForm'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <h1 className="text-3xl font-bold text-center">welcome to Ai recommended smartphone</h1>
+   <div className='min-h-screen px-4 py-8 bg-black text-white'>
+    <CustomerRegisterForm />
+   </div>
   )
 }
 

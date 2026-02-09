@@ -1,5 +1,5 @@
-module.exports = {
-  mobilePrompt: (data) => `
+export function mobilePrompt(data) {
+  return `
 You are an expert smartphone recommendation engine.
 
 User preferences:
@@ -31,5 +31,5 @@ JSON format:
   ],
   "summary": ""
 }
-`
-};
+`;
+}

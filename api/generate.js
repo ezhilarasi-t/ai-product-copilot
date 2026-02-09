@@ -1,5 +1,7 @@
+export const runtime = "nodejs";
+
 import GoogleGenAI from "@google/genai";
-import { mobilePrompt } from "../mobilePrompt.js";
+import { mobilePrompt } from "../lib/mobilePrompt.js";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -15,18 +17,13 @@ export default async function handler(req, res) {
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: prompt }],
-        },
-      ],
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
     });
 
-    const text = response?.text;
+    const text = response?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!text) {
-      return res.status(500).json({ error: "No text returned from Gemini" });
+      throw new Error("Empty Gemini response");
     }
 
     try {
@@ -35,7 +32,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ result: text });
     }
   } catch (err) {
-    console.error(err);
+    console.error("API ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }

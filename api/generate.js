@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 
 import GoogleGenAI from "@google/genai";
-import { mobilePrompt } from "../lib/mobilePrompt.js";
+import { mobilePrompt } from "./mobilePrompt.js";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,

@@ -8,7 +8,6 @@ const ResultPage = ({ result, onBack }) => {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-black p-6 flex justify-center items-start">
       <div className="max-w-4xl w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 text-white">
-
         {/* Back Button */}
         <button
           onClick={onBack}
@@ -27,22 +26,25 @@ const ResultPage = ({ result, onBack }) => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 bg-white/10 rounded-2xl p-5">
-
             {/* IMAGE */}
-            <div className="flex justify-center items-center">
-              <img
-                src={bestMatch?.image || "https://via.placeholder.com/300"}
-                alt={bestMatch?.name}
-                className="max-h-64 rounded-xl object-contain shadow-lg"
-              />
-            </div>
+            {bestMatch?.image && (
+              <div className="flex justify-center items-center">
+                <img
+                  src={bestMatch.image.trim()}
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://via.placeholder.com/300";
+                  }}
+                  alt={bestMatch?.name || "Product Image"}
+                  className="max-h-64 rounded-xl object-contain shadow-lg"
+                />
+              </div>
+            )}
 
             {/* DETAILS */}
             <div>
               <h3 className="text-2xl font-bold">{bestMatch?.name}</h3>
-              <p className="text-lg text-amber-400 mt-1">
-                {bestMatch?.price}
-              </p>
+              <p className="text-lg text-amber-400 mt-1">{bestMatch?.price}</p>
 
               {/* Confidence */}
               <div className="mt-3">
@@ -59,9 +61,7 @@ const ResultPage = ({ result, onBack }) => {
               </div>
 
               {bestMatch?.why && (
-                <p className="mt-4 text-sm text-gray-300">
-                  {bestMatch.why}
-                </p>
+                <p className="mt-4 text-sm text-gray-300">{bestMatch.why}</p>
               )}
 
               {/* Pros & Cons */}
@@ -98,9 +98,7 @@ const ResultPage = ({ result, onBack }) => {
                 className="p-4 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition"
               >
                 <div className="font-medium">{alt.name}</div>
-                <p className="text-sm text-gray-300 mt-1">
-                  {alt.reason}
-                </p>
+                <p className="text-sm text-gray-300 mt-1">{alt.reason}</p>
               </div>
             ))}
           </div>
@@ -110,9 +108,7 @@ const ResultPage = ({ result, onBack }) => {
         {summary && (
           <section className="border-t border-white/10 pt-4">
             <h4 className="font-semibold mb-2">AI Summary</h4>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              {summary}
-            </p>
+            <p className="text-gray-300 text-sm leading-relaxed">{summary}</p>
           </section>
         )}
       </div>

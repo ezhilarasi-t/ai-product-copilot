@@ -27,6 +27,7 @@ const CustomerRegisterForm = () => {
 
   const [response, setResponse] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleTopPriorities = (e) => {
     const { value, checked } = e.target;
@@ -48,16 +49,22 @@ const CustomerRegisterForm = () => {
         additionalPreference: details.additionalPreference,
       };
 
-      const res = await fetch("http://localhost:3000/api/generate", {
+      const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       const data = await res.json();
+      if (!res.ok || data?.error) {
+        console.error("API Error:", data);
+        setError(true);
+        return;
+      }
       setResponse(data);
     } catch (err) {
       console.error(err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -73,7 +80,6 @@ const CustomerRegisterForm = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-black via-gray-900 to-gray-950 flex items-center justify-center px-4">
       <div className="w-full max-w-2xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 text-white">
-
         {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-semibold tracking-wide">
@@ -86,16 +92,12 @@ const CustomerRegisterForm = () => {
 
         {/* Budget */}
         <div className="mb-5">
-          <label className="block mb-2 text-sm font-medium">
-            Budget (₹)
-          </label>
+          <label className="block mb-2 text-sm font-medium">Budget (₹)</label>
           <input
             type="number"
             placeholder="e.g. 30000"
             className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 focus:outline-none focus:border-amber-400"
-            onChange={(e) =>
-              setDetails({ ...details, budget: e.target.value })
-            }
+            onChange={(e) => setDetails({ ...details, budget: e.target.value })}
           />
         </div>
 
@@ -129,9 +131,7 @@ const CustomerRegisterForm = () => {
 
         {/* Usage */}
         <div className="mb-5">
-          <label className="block mb-3 text-sm font-medium">
-            Usage Type
-          </label>
+          <label className="block mb-3 text-sm font-medium">Usage Type</label>
           <div className="grid grid-cols-2 gap-3">
             {usageType.map((item) => (
               <label
@@ -189,6 +189,11 @@ const CustomerRegisterForm = () => {
         >
           {loading ? "Analyzing with AI..." : "Find My Best Match"}
         </button>
+        {error && (
+          <p className="text-red-500 text-center mt-4">
+            An error occured while fetching, Please try again..
+          </p>
+        )}
       </div>
     </div>
   );

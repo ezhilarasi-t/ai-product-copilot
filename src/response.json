@@ -1,29 +1,31 @@
 {
-  "bestMatch": {
-    "name": "Poco F6",
-    "price": "₹29,999",
-    "confidence": "95%",
-    "why": "It features the Snapdragon 8s Gen 3 chipset, which provides the highest raw performance and gaming benchmarks in this price bracket, paired with a solid Sony IMX882 main sensor for quality photography.",
-    "pros": [
-      "Top-tier Snapdragon 8s Gen 3 processor",
-      "120Hz 1.5K AMOLED display",
-      "90W fast charging",
-      "LPDDR5X RAM and UFS 4.0 storage"
-    ],
-    "cons": [
-      "Plastic frame build",
-      "Ultrawide camera is average compared to main sensor"
-    ]
-  },
-  "alternatives": [
-    {
-      "name": "Realme GT 6T",
-      "reason": "Equipped with the Snapdragon 7+ Gen 3 and a massive 5500mAh battery with 120W charging, offering superior battery life for long gaming sessions."
+    "bestMatch": {
+        "name": "Samsung Galaxy S23 5G",
+        "price": "₹52,999",
+        "image": "https://m.media-amazon.com/images/I/51L8W6d-yNL._SL1500_.jpg",
+        "confidence": "92%",
+        "why": "The Galaxy S23 is the most balanced flagship in this price range. It features the Snapdragon 8 Gen 2 for Galaxy, which provides top-tier performance for daily use and gaming, paired with a versatile triple-camera system that excels in both photography and video.",
+        "pros": [
+            "Excellent triple camera setup with 3x optical zoom",
+            "Powerful Snapdragon 8 Gen 2 processor",
+            "Compact and premium build quality",
+            "Long-term software support from Samsung"
+        ],
+        "cons": [
+            "Slower 25W charging compared to rivals",
+            "Small screen might not suit everyone",
+            "Base model starts at 128GB storage"
+        ]
     },
-    {
-      "name": "Motorola Edge 50 Pro",
-      "reason": "Offers a more balanced camera system including a telephoto lens and a premium display, though the Snapdragon 7 Gen 3 is slightly less powerful for hardcore gaming."
-    }
-  ],
-  "summary": "For a budget of 30,000, the Poco F6 is the performance leader for gaming. If you prefer better battery endurance and faster charging, the Realme GT 6T is the ideal runner-up, while the Motorola Edge 50 Pro is better if photography is as important as gaming."
+    "alternatives": [
+        {
+            "name": "Google Pixel 8",
+            "reason": "Best choice for users who prioritize still photography and AI-driven camera features over raw processing power."
+        },
+        {
+            "name": "OnePlus 12R",
+            "reason": "Offers superior battery life, faster charging, and a better display if you are willing to sacrifice a dedicated telephoto lens."
+        }
+    ],
+    "summary": "For a budget of 60,000, the Samsung Galaxy S23 is the best all-rounder. It delivers a true flagship experience with a high-performance chipset and a professional-grade camera system that outperforms most mid-range alternatives in low light and zoom capabilities."
 }

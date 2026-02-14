@@ -26,9 +26,9 @@ const ResultPage = ({ result, onBack }) => {
             <h2 className="text-2xl font-semibold">Recommended for You</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 bg-white/10 rounded-2xl p-5">
+          <div className="grid  bg-white/10 rounded-2xl p-5">
             {/* IMAGE */}
-            {bestMatch?.image && (
+            {/* {bestMatch?.image && (
               <div className="flex justify-center items-center">
                 <img
                   src={bestMatch.image.trim()}
@@ -40,7 +40,7 @@ const ResultPage = ({ result, onBack }) => {
                   className="max-h-64 rounded-xl object-contain shadow-lg"
                 />
               </div>
-            )}
+            )} */}
 
             {/* DETAILS */}
             <div>

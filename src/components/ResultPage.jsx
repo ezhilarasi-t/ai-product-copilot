@@ -1,3 +1,4 @@
+import { Annoyed, Smile } from "lucide-react";
 import React from "react";
 
 const ResultPage = ({ result, onBack }) => {
@@ -6,8 +7,8 @@ const ResultPage = ({ result, onBack }) => {
   const { bestMatch, alternatives = [], summary } = result;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-black p-6 flex justify-center items-start">
-      <div className="max-w-4xl w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 text-white">
+    <div className="min-h-screen p-6 flex justify-center items-start">
+      <div className="max-w-4xl w-full bg-linear-to-br from-[#433248] to-[#433248] bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 text-white">
         {/* Back Button */}
         <button
           onClick={onBack}
@@ -18,7 +19,7 @@ const ResultPage = ({ result, onBack }) => {
 
         {/* BEST MATCH */}
         <section className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex-col items-center gap-2 mb-4">
             <span className="px-3 py-1 text-xs rounded-full bg-amber-500/20 text-amber-300">
               Best Choice
             </span>
@@ -54,7 +55,7 @@ const ResultPage = ({ result, onBack }) => {
                 </div>
                 <div className="h-2 bg-white/20 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-amber-400"
+                    className="h-full bg-green-400"
                     style={{ width: bestMatch?.confidence || "80%" }}
                   />
                 </div>
@@ -65,21 +66,21 @@ const ResultPage = ({ result, onBack }) => {
               )}
 
               {/* Pros & Cons */}
-              <div className="mt-5 grid grid-cols-2 gap-4 text-sm">
+              <div className="mt-5 grid grid-cols-2 gap-4 md:gap-6 text-sm">
                 <div>
-                  <h4 className="font-semibold text-green-400 mb-1">Pros</h4>
+                  <h4 className="font-semibold inline-block px-2 bg-green-500/15 text-green-400 mb-1">Pros</h4>
                   <ul className="space-y-1">
                     {(bestMatch?.pros || []).map((p, i) => (
-                      <li key={i}>• {p}</li>
+                      <li key={i} className="flex gap-1"><Smile /> {p}</li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-red-400 mb-1">Cons</h4>
+                  <h4 className="font-semibold inline-block px-2 bg-red-500/15 text-red-400 mb-1">Cons</h4>
                   <ul className="space-y-1">
                     {(bestMatch?.cons || []).map((c, i) => (
-                      <li key={i}>• {c}</li>
+                      <li key={i} className="flex gap-1"><Annoyed /> {c}</li>
                     ))}
                   </ul>
                 </div>

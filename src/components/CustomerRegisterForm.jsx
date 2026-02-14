@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ResultPage from "./ResultPage";
-
+import staticResult from "../response.json";
 const priorities = [
   "Performance",
   "Camera Quality",
@@ -34,8 +34,8 @@ const CustomerRegisterForm = () => {
     setDetails((prev) => ({
       ...prev,
       priorities: checked
-        ? [...prev.priorities, value]
-        : prev.priorities.filter((p) => p !== value),
+        ? [...prev?.priorities, value]
+        : prev?.priorities?.filter((p) => p !== value),
     }));
   };
 
@@ -43,10 +43,10 @@ const CustomerRegisterForm = () => {
     setLoading(true);
     try {
       const payload = {
-        budget: details.budget,
-        priorities: details.priorities,
-        usage: details.usageType,
-        additionalPreference: details.additionalPreference,
+        budget: details?.budget,
+        priorities: details?.priorities,
+        usage: details?.usageType,
+        additionalPreference: details?.additionalPreference,
       };
 
       const res = await fetch("/api/generate", {
@@ -56,6 +56,7 @@ const CustomerRegisterForm = () => {
       });
 
       const data = await res.json();
+      // const data = staticResult; //local purpose to validate
       if (!res.ok || data?.error) {
         console.error("API Error:", data);
         setError(true);
@@ -71,21 +72,21 @@ const CustomerRegisterForm = () => {
   };
 
   const formBtnDisabled =
-    !details.budget || details.priorities.length === 0 || !details.usageType;
+    !details?.budget || details?.priorities?.length === 0 || !details?.usageType;
 
   if (Object.keys(response).length > 0) {
     return <ResultPage result={response} onBack={() => setResponse({})} />;
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-black via-gray-900 to-gray-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-2xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 text-white">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-2xl bg-linear-to-br from-[#433248] to-[#433248] bg-white/5 backdrop-blur-xl border border-[#433248]/10 rounded-3xl shadow-2xl p-6 text-white">
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-semibold tracking-wide">
+          <h1 className="text-3xl font-semibold text-yellow-400 tracking-wide">
             AI Product Decision Copilot
           </h1>
-          <p className="text-gray-400 mt-2">
+          <p className="text-green-300 mt-2">
             Find the best smartphone tailored to your needs
           </p>
         </div>
@@ -112,7 +113,7 @@ const CustomerRegisterForm = () => {
                 key={item}
                 className={`px-4 py-2 rounded-full border cursor-pointer text-sm transition
                   ${
-                    details.priorities.includes(item)
+                    details?.priorities?.includes(item)
                       ? "bg-amber-400 text-black border-amber-400"
                       : "border-white/20 hover:border-amber-300"
                   }`}
@@ -132,13 +133,13 @@ const CustomerRegisterForm = () => {
         {/* Usage */}
         <div className="mb-5">
           <label className="block mb-3 text-sm font-medium">Usage Type</label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-wrap gap-3">
             {usageType.map((item) => (
               <label
                 key={item}
-                className={`p-3 rounded-xl border cursor-pointer text-sm text-center transition
+                className={`p-2 rounded-xl border cursor-pointer text-sm text-center transition
                   ${
-                    details.usageType === item
+                    details?.usageType === item
                       ? "bg-amber-400 text-black border-amber-400"
                       : "border-white/20 hover:border-amber-300"
                   }`}
